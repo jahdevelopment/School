@@ -54,34 +54,18 @@ namespace School
         }
 
         // one course contains many students
-        private HashSet<Student> _students = new HashSet<Student>();
-        // get method exposes entire collection -- make specific methods instead
-        public Student? GetStudentInCourse(int studentId)
-        {
-            foreach (Student s in _students)
-            {
-                if (s.StudentId == studentId)
-                {
-                    return s;
-                }
-            }
+        private HashSet<Enrolment> _enrolments = new HashSet<Enrolment>();
 
-            return null;
-        }
-        public void AddStudentToCourse(Student student)
+        public void AddEnrolment(Enrolment enrolment)
         {
-            if (_students.Count < Capacity)
-            {
-                _students.Add(student);
-            }
-            else
-            {
-                throw new Exception($"Course is at enrolment capacity {Capacity}");
-            }
+            _enrolments.Add(enrolment);
         }
-        public void RemoveStudentFromCourse(Student student)
+
+        public HashSet<Enrolment> GetEnrolments() 
         {
-            _students.Remove(student);
+            HashSet<Enrolment> setCopy = _enrolments.ToHashSet();
+
+            return setCopy;
         }
 
         public Course(int courseId, string title, int capacity)
